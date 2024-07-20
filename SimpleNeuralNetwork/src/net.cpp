@@ -59,7 +59,7 @@ void net::layer::outputLayerDerivative(const vector<netfloat_t>& desiredOut)
 	computeDelta(in, desiredOut, delta);
 	computeCost(delta);
 	for (int i = 0; i < dz.size(); ++i) {
-		dz[i] = dout[i] * delta[i];
+		dz[i] = delta[i] * dout[i];
 	}
 	dout.resize(0);
 	delta.resize(0);
@@ -293,13 +293,6 @@ void net::softmax::activation(const vector<netfloat_t>& in_, vector<netfloat_t>&
 void net::softmax::derivative(const vector<netfloat_t>& x, vector<netfloat_t>& dx)
 {
 	for (int i = 0; i < x.size(); ++i) {
-		for (int j = 0; j < x.size(); ++j) {
-			if (i != j) {
-				//dx.push_back(-x[i] * x[j]);
-			}
-			else {
-				dx.push_back(x[i] * (1.0 - x[i]));
-			}
-		}
+		dx.push_back(x[i] * (1.0 - x[i]));
 	}
 }

@@ -54,6 +54,7 @@ int mnist::parseCSVFile(const string& filename, vector<vector<double>>& inSet,
 			--samplesToRead;
 			inSet.push_back(in);
 			outSet.push_back(out);
+			cout << samplesToRead << endl;
 		}
 	}
 	fin.close();
